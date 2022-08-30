@@ -1,0 +1,45 @@
+//윤다슬
+import java.util.Scanner;
+
+public class Tax {
+    public static void main(String arg[]) {
+        int income;
+        int tax;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("연소득을 입력해 주세요.: ");
+        income = scan.nextInt();
+
+        if (income <= 12000000)
+        {
+            tax = (int) (income * 0.06);
+        } else if (income <= 46000000 && income>12000000)
+        {
+            tax = (int) (income * 0.15);
+
+        } else if (income <= 88000000 && income>46000000)
+        {
+            tax = (int) (income * 0.24);
+
+        } else if (income <= 150000000 && income>88000000 )
+        {
+            tax = (int) (income * 0.35);
+
+        } else if (income <= 300000000 && income>150000000 )
+        {
+            tax = (int) (income * 0.38);
+
+        } else if (income <= 500000000 && income>300000000 )
+        {
+            tax = (int) (income * 0.4);
+
+        } else if (income <= 1000000000 && income>500000000 )
+        {
+            tax = (int) (income * 0.42);
+
+        } else {
+            tax = (int) (income * 0.45);
+        }
+        System.out.println("[세율에 의한 세금] : " );
+        System.out.println("[누진공제 계산에 의한 세금] : " + tax);
+    }
+    }
