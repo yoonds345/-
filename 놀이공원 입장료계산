@@ -1,0 +1,50 @@
+//윤다슬
+import java.util.Scanner;
+
+public class Ticket {
+    public static void main (String[] args){
+        Scanner scan = new Scanner(System.in);
+
+        int Ticketprice; // 입장권 가격
+
+        System.out.println("[입장권 계산]"); // 기본 10000원
+
+        System.out.println("나이를 입력하세요 : "); //3세 미만 무료 입장
+        int age = scan.nextInt();
+
+        System.out.println("입장시간을 입력하세요 : "); //17시 이후 입장시 특별 할인 4000원
+        int time = scan.nextInt();
+
+        System.out.println("국가유공자 여부를 입력하세요 (Yes/No): "); // Yes 일반 할인 8000원
+        char NatMerit = scan.next().trim().charAt(0); //trim 앞뒤 공백 제거, charAt() 특정 순번 글자 하나를 반환
+                                                    // trim과 charAt()를 쓴이유? Yes와 No의 첫번째 글자만 뽑아와서 유뮤를 확인
+        System.out.println(("복지카드 여부를 입력하세요 (Yes/No): ")); // Yes 일반 할인 8000원
+        char WelCard = scan.next().trim().charAt(0);
+
+        // 나이, 입장 시간, 국가 유공자 여부, 복지카드 여부
+        if ( age < 3 ) //3세 미만인 경우 0원
+        {
+            Ticketprice = 0;
+
+    } else if ( time >= 17 && time <= 24 ) // 17-24시 사이 방문이면 4000원
+        {
+            Ticketprice = 4000;
+
+        } else if ( NatMerit == 'Y')
+            {
+                Ticketprice = 8000;
+
+        } else if (WelCard == 'Y')
+            {
+                Ticketprice = 8000;
+
+            } else {
+                Ticketprice = 10000;
+
+        }
+        System.out.println(String.format("입장권 : %d 입니다.", Ticketprice));
+        scan.close();
+        }
+
+
+    }
