@@ -1,0 +1,43 @@
+//윤다슬
+import java.util.Calendar;
+import java.util.Scanner;
+
+public class CalenDar {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("[달력 출력 프로그램]");
+
+        System.out.print("달력의 년도를 입력해 주세요.(YYYY) : ");
+        int year = scan.nextInt();
+
+        System.out.print("달력의 월을 입력해 주세요.(MM) : ");
+        int month = scan.nextInt();
+
+        System.out.println(" ["+year+ "년  " + month + "월" +" ]");
+
+        System.out.println("  일   월  화  수  목  금   토");
+
+        Calendar cal = Calendar.getInstance(); //객체 생성
+
+        cal.set(year, month-1 , 1); // 희망 날짜 설정, 월의 범위는 0~11라서 -1, 일은 1부터 시작
+
+        int LastDate = cal.getActualMaximum(Calendar.DATE); // 마지막 날짜 구하기
+
+        int week = cal.get(Calendar.DAY_OF_WEEK); // 주 구하기
+
+        for( int i = 1 ; i <week ; i++) // 1일이 해당 요일 위치에 오게 해주는 공백
+            System.out.print("    ");
+
+        for( int i = 1 ; i <= LastDate ; i++) {
+            System.out.print((i < 10) ? "   " + i : "  " + i);
+            if (week % 7 == 0) // 토요일에 날짜 표시, 줄바꿈
+                System.out.println();
+            week++;
+        }
+
+    }
+
+
+}
