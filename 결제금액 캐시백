@@ -1,0 +1,35 @@
+//윤다슬
+import java.util.Scanner;
+
+public class Cashback {
+    public static void main(String[] args) {
+        int Cash;
+        int Cashback;
+
+        Scanner scan = new Scanner(System.in); //Scanner의 입력 함수와 조건문을 사용
+        System.out.println("[캐시백 계산]");
+        System.out.println("결제 금액을 입력하시오 : ");
+        Cash = scan.nextInt();
+        Cashback = Cash / 10; // 캐시백 계산 조건 : 결제금액의 10% 적립
+
+        if (Cashback >= 300) // 캐시백의 포인트는 최대 300원만 가능
+        {
+            Cashback = 300;
+            System.out.println(String.format("결제금액은 %d원 이고, 캐시백은 %d원 입니다.", Cash, Cashback));
+
+        } else if (Cashback < 300 && Cashback >= 200) { // 캐시백은 100원 단위 200원과 300원 사이라면 200으로 고정
+            Cashback = 200;
+            System.out.println(String.format("결제금액은 %d원 이고, 캐시백은 %d원 입니다.", Cash, Cashback));
+
+        } else if (Cashback < 200 && Cashback >= 100) {
+            Cashback = 100;
+            System.out.println(String.format("결제금액은 %d원 이고, 캐시백은 %d원 입니다.", Cash, Cashback));
+
+        } else if (Cashback < 100) {
+            Cashback = 0;
+            System.out.println(String.format("결제금액은 %d원 이고, 캐시백은 %d원 입니다.", Cash, Cashback));
+
+        }
+        scan.close();
+    }
+}
