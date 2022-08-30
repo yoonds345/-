@@ -1,0 +1,117 @@
+//윤다슬
+{
+    public static void output() {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<int[]> listNumber = new ArrayList<>(); // 구매한 로또번호 배열
+        int buy;    // 로또 구매 수량
+        char orderNumber = 'A'; // A로 시작
+        int[] printNumber; // 출력 번호
+        int[] prizeNumber;    // 당첨 번호
+
+        try {
+            System.out.println("[로또 당첨 프로그램]\n");
+            System.out.print("로또의 개수를 입력해 주세요.(숫자 1 ~ 10): ");
+            buy = sc.nextInt();
+
+            if (!(buy > 0 && buy < 11)) {
+                System.out.println("1~10 사이 숫자만 입력해주세요.");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("옳바른 숫자를 입력해주세요.");
+            return;
+        }
+
+        for (int i = 0; i < buy; i++) {   // 입력 받은 개수에 따른 로또 번호 랜덤 생성, 랜덤 로또 번호 생성 6자리 숫자
+            listNumber.add(i, lottoNumberCreate());
+        }
+
+
+        for (int i = 0; i < listNumber.size(); i++)           // 생성된 로또 번호 출력
+        {
+            printNumber = new int[6];
+            for (int j = 0; j < printNumber.length; j++) {
+                printNumber = listNumber.get(i);
+                if (j == 0) {
+                    System.out.printf("%s\t%02d", orderNumber, printNumber[j]);
+                } else if (j < printNumber.length - 1) {
+                    System.out.printf(",%02d", printNumber[j]);
+                } else {
+                    System.out.printf(",%02d\n", printNumber[j]);
+                }
+            }
+            if (i < listNumber.size() - 1) {
+                orderNumber++;
+            } else {
+                orderNumber = 'A';
+                System.out.println();
+            }
+        }
+
+
+        System.out.println("[로또 당첨 발표]"); //로또 당첨 번호 출력
+
+        prizeNumber = lottoNumberCreate(); // 당첨 번호 랜덤 생성
+
+        for (int i = 0; i < prizeNumber.length; i++) {
+            if (i == 0) {
+                System.out.printf(" \t%02d", prizeNumber[i]);
+            } else if (i < prizeNumber.length - 1) {
+                System.out.printf(",%02d", prizeNumber[i]);
+            } else {
+                System.out.printf(",%02d\n\n", prizeNumber[i]);
+            }
+        }
+
+
+        System.out.println("[나의 로또 결과]");  // 당첨 번호와 구매 로또 번호를 비교하여 숫자 일치 여부 판단
+        for (int i = 0; i < listNumber.size(); i++) {
+            int cnt = 0;
+            printNumber = listNumber.get(i);
+
+            for (int j = 0; j < printNumber.length; j++) {
+                for (int k = 0; k < printNumber.length; k++) {
+                    if (printNumber[j] == prizeNumber[k]) {
+                        cnt++;
+                    }
+                }
+                if (j == 0) {
+                    System.out.printf("%s\t%02d", orderNumber, printNumber[j]);
+                } else if (j < printNumber.length - 1) {
+                    System.out.printf(",%02d", printNumber[j]);
+                } else {
+                    System.out.printf(",%02d => %d개 일치\n", printNumber[j], cnt);
+                }
+            }
+            if (i < listNumber.size() - 1) {
+                orderNumber++;
+            } else {
+                orderNumber = 'A';
+                System.out.println();
+            }
+        }
+    }
+
+
+    public static int[] lottoNumberCreate() //로또 번호 자동 생성
+    {
+        int[] inputNumber = new int[6];
+
+        for (int i = 0; i < inputNumber.length; i++) {
+            inputNumber[i] = (int) (Math.random() * 45) + 1;
+            for (int j = 0; j < i; j++) {
+                if (inputNumber[i] == inputNumber[j]) {
+                    i--;
+                    break;
+                }
+            }
+        }
+        Arrays.sort(inputNumber);
+        return inputNumber;
+    }
+
+    public static void main(String[] args) {
+
+        output();   //로또 입력과 출력
+    }
+}
