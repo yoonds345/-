@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class work {
+    public static void main(String[] args) {
+    	 Scanner scan = new Scanner(System.in);
+         int [] x = new int[11]; 
+         int [] y = new int[11]; 
+         int count = 1, closestX, closestY;
+         double closest, calculation = 0;
+      
+         System.out.println("본인의 위치 x 좌표를 입력해주세요 : ");   
+         x[0] = scan.nextInt();
+         System.out.println("본인의 위치 y 좌표를 입력해주세요 : ");   
+         y[0] = scan.nextInt();
+
+
+        do {
+
+             System.out.println(count + "번째 랜덤 x 좌표를 입력해주세요 : ");   
+             int test_x = scan.nextInt();
+             System.out.println(count + "번째 랜덤 y 좌표를 입력해주세요 : ");   
+             int test_y = scan.nextInt();
+             x[count] = test_x;
+             y[count] = test_y;
+             count++;
+         } while(count<11);
+
+         closest = Math.sqrt( Math.pow((x[0]-x[1]),2) + Math.pow((y[0]-y[1]),2) );
+         closestX = x[1];
+         closestY = y[1];
+
+         for (int i = 2; i<x.length; i++){
+
+             calculation = Math.sqrt( Math.pow((x[0]-x[i]),2) + Math.pow((y[0]-y[i]),2) );
+             if (closest > calculation){
+                 closest = calculation;
+                 closestX = x[i];
+                 closestY = y[i];
+             }
+         }
+
+         System.out.println("나의 좌표 ( " + x[0] + " , " + y[0] + ") 입니다.");
+         System.out.println("가장 가까운 좌표는 (" + closestX + " , " + closestY + " ) 입니다.");
+
+    } 
+}
